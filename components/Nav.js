@@ -5,6 +5,7 @@ export default function Nav() {
   const router = useRouter()
   const isLibrary = router.pathname === '/'
   const isFixer   = router.pathname === '/fixer'
+  const isBlog    = router.pathname.startsWith('/blog')
 
   return (
     <nav className="nav">
@@ -21,6 +22,9 @@ export default function Nav() {
         </Link>
         <Link href="/fixer" className={`nav-tab ${isFixer ? 'active' : ''}`}>
           🔧 Fix My Script <span className="tab-badge">AI</span>
+        </Link>
+        <Link href="/blog" className={`nav-tab ${isBlog ? 'active' : ''}`}>
+          📖 Guides
         </Link>
       </div>
     </nav>
