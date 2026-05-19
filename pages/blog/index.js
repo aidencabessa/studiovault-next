@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Nav from '../components/Nav'
-import { POSTS } from '../lib/posts'
+import Nav from '../../components/Nav'
+import { POSTS } from '../../lib/posts'
 
 export default function Blog() {
   return (
