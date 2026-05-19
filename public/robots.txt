@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://studiovault-gamma.vercel.app/sitemap.xml
+Sitemap: https://studiovault-next.vercel.app/sitemap.xml
