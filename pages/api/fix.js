@@ -13,24 +13,34 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         max_tokens: 4096,
+        temperature: 0,  // deterministic — no hallucinations
         messages: [
-          { role: "system", content: req.body.system },
-          { role: "user",   content: req.body.messages[0].content },
+          {
+            role: "system",
+            content: req.body.system
+          },
+          {
+            role: "user",
+            content: req.body.messages[0].content
+          },
         ],
       }),
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
-      return res.status(response.status).json({ error: data });
+      const errBody = await response.text().catch(() => "");
+      return res.status(response.status).json({ error: errBody });
     }
 
-    let text = data.choices?.[0]?.message?.content || "";
+    const data = await response.json();
 
-    // Strip DeepSeek's <think>...</think> reasoning block before parsing
-    text = text.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+    if (data.error) {
+      return res.status(500).json({ error: data.error });
+    }
 
+    const text = data.choices?.[0]?.message?.content || "";
+
+    // Return in Anthropic-compatible shape so frontend works unchanged
     return res.status(200).json({
       content: [{ type: "text", text }]
     });
