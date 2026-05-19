@@ -27,7 +27,7 @@ export default function Home() {
         <meta property="og:title" content="StudioVault — Free Roblox Studio Luau Scripts" />
         <meta property="og:description" content="Copy-paste Luau scripts for Roblox Studio plus an AI script fixer. Free forever." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://studiovault-gamma.vercel.app" />
+        <link rel="canonical" href="https://studiovault-next.vercel.app" />
 
         {/* Noscript SEO fallback */}
         <noscript>{`

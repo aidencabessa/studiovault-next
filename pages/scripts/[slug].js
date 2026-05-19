@@ -40,7 +40,7 @@ export default function ScriptPage({ script, related }) {
         <meta property="og:title" content={`${script.title} — Free Roblox Luau Script`} />
         <meta property="og:description" content={script.desc} />
         <meta property="og:type" content="article" />
-        <link rel="canonical" href={`https://studiovault-gamma.vercel.app/scripts/${script.slug}`} />
+        <link rel="canonical" href={`https://studiovault-next.vercel.app/scripts/${script.slug}`} />
       </Head>
 
       <Nav />

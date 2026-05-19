@@ -1,6 +1,6 @@
 import { SNIPPETS } from '../lib/snippets'
 
-const BASE = 'https://studiovault-gamma.vercel.app'
+const BASE = 'https://studiovault-next.vercel.app'
 
 function generateSitemap(snippets) {
   return `<?xml version="1.0" encoding="UTF-8"?>
