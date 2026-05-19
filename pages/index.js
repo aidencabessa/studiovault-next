@@ -93,7 +93,7 @@ export default function Home() {
       </div>
 
       <footer className="footer">
-        <b>StudioVault</b> · Free Luau scripts for Roblox developers · AI fixer powered by Groq
+        <b>StudioVault</b> · Free Luau scripts for Roblox developers · AI fixer powered by Gemini
       </footer>
     </>
   )

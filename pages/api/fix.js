@@ -4,28 +4,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        max_tokens: 4096,
-        temperature: 0,  // deterministic — no hallucinations
-        messages: [
-          {
-            role: "system",
-            content: req.body.system
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [{ text: req.body.system }]
           },
-          {
-            role: "user",
-            content: req.body.messages[0].content
-          },
-        ],
-      }),
-    });
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: req.body.messages[0].content }]
+            }
+          ],
+          generationConfig: {
+            temperature: 0,
+            maxOutputTokens: 4096,
+          }
+        }),
+      }
+    );
 
     if (!response.ok) {
       const errBody = await response.text().catch(() => "");
@@ -38,7 +38,8 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: data.error });
     }
 
-    const text = data.choices?.[0]?.message?.content || "";
+    // Extract text from Gemini response format
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
     // Return in Anthropic-compatible shape so frontend works unchanged
     return res.status(200).json({
