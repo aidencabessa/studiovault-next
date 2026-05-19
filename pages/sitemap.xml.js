@@ -1,4 +1,4 @@
-import { SNIPPETS } from '../../lib/snippets'
+import { SNIPPETS } from '../lib/snippets'
 
 const BASE = 'https://studiovault-gamma.vercel.app'
 
